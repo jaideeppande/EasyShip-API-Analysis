@@ -1,0 +1,1025 @@
+# List all Couriers
+
+Retrieve a list of active couriers.
+
+Required authorization scope: `public.courier:read`
+
+
+# OpenAPI definition
+
+```json
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Easyship Public API",
+    "version": "v2024-09",
+    "description": "## Powerful Shipping API for Ecommerce\nEasyship provides a powerful shipping API for you to add hassle free worldwide shipping options to your website and end to end shipping functionality to your warehouse, ERP or platform.\n\n### Craft an amazing checkout experience\nProvide instant access to heavily discounted shipping with a single integration. Let end customers choose their preferred shipping method and cost, all within your own UI. Once they've selected and paid, confirm the shipment and all costs are guaranteed by us.\n\n### Write less code, have more options\nYou don’t need to be a shipping expert. We continuously add new shipping solutions to our platform to provide better pricing and service to our users. You don’t need to open direct accounts or write multiple integrations, once we’ve added them, they’re available to you instantly.\n\n### Streamline your processes\nInteract with the Easyship platform from any interface. Whether it’s your ecommerce platform, warehouse/wms, ERP or order management system, you can get rates, create shipments, download labels and track deliveries, without leaving your main business system.",
+    "termsOfService": "https://www.easyship.com/legal/terms/overview",
+    "contact": {
+      "name": "Easyship Support",
+      "url": "https://www.easyship.com/contact"
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Easyship API",
+    "url": "https://developers.easyship.com/"
+  },
+  "tags": [
+    {
+      "name": "Couriers"
+    }
+  ],
+  "paths": {
+    "/2024-09/couriers": {
+      "get": {
+        "summary": "List all Couriers",
+        "tags": [
+          "Couriers"
+        ],
+        "operationId": "couriers_index",
+        "description": "Retrieve a list of active couriers.\n\nRequired authorization scope: `public.courier:read`\n",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "required": false,
+            "description": "Page number to fetch, default: `1`",
+            "example": 1
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "required": false,
+            "description": "Number of records per page to fetch, default: `20`",
+            "example": 10
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "customer_reference_id",
+                "umbrella_name",
+                "country_alpha2",
+                "created_at"
+              ]
+            },
+            "required": false,
+            "description": "Sort records by listed columns. Default: `created_at`",
+            "example": "created_at"
+          },
+          {
+            "name": "sort_direction",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ]
+            },
+            "required": false,
+            "description": "Set the sort direction. Default: `DESC`",
+            "example": "ASC"
+          },
+          {
+            "name": "country_alpha2",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "AD",
+                  "AE",
+                  "AF",
+                  "AG",
+                  "AI",
+                  "AL",
+                  "AM",
+                  "AN",
+                  "AO",
+                  "AQ",
+                  "AR",
+                  "AS",
+                  "AT",
+                  "AU",
+                  "AW",
+                  "AX",
+                  "AZ",
+                  "BA",
+                  "BB",
+                  "BD",
+                  "BE",
+                  "BF",
+                  "BG",
+                  "BH",
+                  "BI",
+                  "BJ",
+                  "BL",
+                  "BM",
+                  "BN",
+                  "BO",
+                  "BQ",
+                  "BR",
+                  "BS",
+                  "BT",
+                  "BV",
+                  "BW",
+                  "BY",
+                  "BZ",
+                  "CA",
+                  "CC",
+                  "CD",
+                  "CF",
+                  "CG",
+                  "CH",
+                  "CI",
+                  "CK",
+                  "CL",
+                  "CM",
+                  "CN",
+                  "CO",
+                  "CR",
+                  "CU",
+                  "CV",
+                  "CW",
+                  "CX",
+                  "CY",
+                  "CZ",
+                  "DE",
+                  "DJ",
+                  "DK",
+                  "DM",
+                  "DO",
+                  "DZ",
+                  "EC",
+                  "EE",
+                  "EG",
+                  "EH",
+                  "ER",
+                  "ES",
+                  "ET",
+                  "FI",
+                  "FJ",
+                  "FK",
+                  "FM",
+                  "FO",
+                  "FR",
+                  "GA",
+                  "GB",
+                  "GD",
+                  "GE",
+                  "GF",
+                  "GG",
+                  "GH",
+                  "GI",
+                  "GL",
+                  "GM",
+                  "GN",
+                  "GP",
+                  "GQ",
+                  "GR",
+                  "GS",
+                  "GT",
+                  "GU",
+                  "GW",
+                  "GY",
+                  "HK",
+                  "HM",
+                  "HN",
+                  "HR",
+                  "HT",
+                  "HU",
+                  "ID",
+                  "IE",
+                  "IL",
+                  "IM",
+                  "IN",
+                  "IO",
+                  "IQ",
+                  "IR",
+                  "IS",
+                  "IT",
+                  "JE",
+                  "JM",
+                  "JO",
+                  "JP",
+                  "KE",
+                  "KG",
+                  "KH",
+                  "KI",
+                  "KM",
+                  "KN",
+                  "KP",
+                  "KR",
+                  "KW",
+                  "KY",
+                  "KZ",
+                  "LA",
+                  "LB",
+                  "LC",
+                  "LI",
+                  "LK",
+                  "LR",
+                  "LS",
+                  "LT",
+                  "LU",
+                  "LV",
+                  "LY",
+                  "MA",
+                  "MC",
+                  "MD",
+                  "ME",
+                  "MF",
+                  "MG",
+                  "MH",
+                  "MK",
+                  "ML",
+                  "MM",
+                  "MN",
+                  "MO",
+                  "MP",
+                  "MQ",
+                  "MR",
+                  "MS",
+                  "MT",
+                  "MU",
+                  "MV",
+                  "MW",
+                  "MX",
+                  "MY",
+                  "MZ",
+                  "NA",
+                  "NC",
+                  "NE",
+                  "NF",
+                  "NG",
+                  "NI",
+                  "NL",
+                  "NO",
+                  "NP",
+                  "NR",
+                  "NU",
+                  "NZ",
+                  "OM",
+                  "PA",
+                  "PE",
+                  "PF",
+                  "PG",
+                  "PH",
+                  "PK",
+                  "PL",
+                  "PM",
+                  "PN",
+                  "PR",
+                  "PS",
+                  "PT",
+                  "PW",
+                  "PY",
+                  "QA",
+                  "RE",
+                  "RO",
+                  "RS",
+                  "RU",
+                  "RW",
+                  "SA",
+                  "SB",
+                  "SC",
+                  "SD",
+                  "SE",
+                  "SG",
+                  "SH",
+                  "SI",
+                  "SJ",
+                  "SK",
+                  "SL",
+                  "SM",
+                  "SN",
+                  "SO",
+                  "SR",
+                  "SS",
+                  "ST",
+                  "SV",
+                  "SX",
+                  "SY",
+                  "SZ",
+                  "TC",
+                  "TD",
+                  "TF",
+                  "TG",
+                  "TH",
+                  "TJ",
+                  "TK",
+                  "TL",
+                  "TM",
+                  "TN",
+                  "TO",
+                  "TR",
+                  "TT",
+                  "TV",
+                  "TW",
+                  "TZ",
+                  "UA",
+                  "UG",
+                  "UM",
+                  "US",
+                  "UY",
+                  "UZ",
+                  "VA",
+                  "VC",
+                  "VE",
+                  "VG",
+                  "VI",
+                  "VN",
+                  "VU",
+                  "WF",
+                  "WS",
+                  "YE",
+                  "YT",
+                  "ZA",
+                  "ZM",
+                  "ZW"
+                ]
+              }
+            },
+            "explode": false,
+            "required": false,
+            "description": "Filter records by country code: Alpha-2 format (ISO 3166-1).",
+            "example": [
+              "US",
+              "HK"
+            ]
+          },
+          {
+            "name": "customer_reference_id",
+            "in": "query",
+            "required": false,
+            "description": "An identifier for a customer (available only for selected customers)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "auth_state",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "unverified",
+                  "verified",
+                  "partially_verified",
+                  "failed"
+                ]
+              }
+            },
+            "explode": false,
+            "required": false,
+            "description": "Filter records by auth state.",
+            "example": [
+              "failed"
+            ]
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "pending_upgrade",
+                  "active",
+                  "inactive"
+                ]
+              }
+            },
+            "explode": false,
+            "required": false,
+            "description": "Filter records by courier state.",
+            "example": [
+              "pending",
+              "active"
+            ]
+          },
+          {
+            "name": "umbrella_name",
+            "in": "query",
+            "required": false,
+            "description": "Filter records by umbrella name.",
+            "example": "Royal Mail",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "active_courier_services",
+            "in": "query",
+            "required": false,
+            "description": "Filter records to only those with available courier services.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "easyship_courier",
+            "in": "query",
+            "required": false,
+            "description": "Whether the courier belongs to Easyship or not.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of couriers",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "default": {
+                    "value": {
+                      "couriers": [
+                        {
+                          "id": "01563646-58c1-4607-8fe0-cae3e33c0001",
+                          "account_number": "123456789",
+                          "auth": {
+                            "errors": [],
+                            "state": "unverified"
+                          },
+                          "created_at": "2022-02-22T12:16:00Z",
+                          "ddp_handling_fee": 0,
+                          "easyship_courier": false,
+                          "filtered_account_details": {
+                            "account_number": "*****6789",
+                            "site_id": "**3"
+                          },
+                          "logo_url": "https://storage.googleapis.com/easyship-assets/website/courier-logos/color-img/dhl.png",
+                          "nickname": "Fedex 1",
+                          "origin_country_alpha2": "HK",
+                          "pickup_fee": 0,
+                          "state": "pending",
+                          "umbrella_name": "FedEx"
+                        },
+                        {
+                          "id": "01563646-58c1-4607-8fe0-cae3e33c0002",
+                          "account_number": "123456789",
+                          "auth": {
+                            "errors": [],
+                            "state": "verified"
+                          },
+                          "created_at": "2022-02-22T12:11:00Z",
+                          "customer_reference_id": "reference id",
+                          "ddp_handling_fee": 1,
+                          "easyship_courier": false,
+                          "filtered_account_details": {
+                            "account_number": "123456789",
+                            "address_line_1": "",
+                            "city": "",
+                            "contact_email": "",
+                            "contact_phone": "",
+                            "customer_name": "",
+                            "oba_email_address": "",
+                            "postal_code": "",
+                            "posting_location": null,
+                            "receiving_hub": ""
+                          },
+                          "logo_url": "https://storage.googleapis.com/easyship-assets/website/courier-logos/color-img/dhl.png",
+                          "nickname": "My Royal Mail",
+                          "origin_country_alpha2": "HK",
+                          "pickup_fee": 0,
+                          "state": "pending",
+                          "umbrella_name": "Royal Mail"
+                        },
+                        {
+                          "id": "01563646-58c1-4607-8fe0-cae3e33c0003",
+                          "auth": {
+                            "errors": [],
+                            "state": "unverified"
+                          },
+                          "easyship_courier": true,
+                          "filtered_account_details": {
+                            "account_number": null,
+                            "site_id": null
+                          },
+                          "logo_url": "https://storage.googleapis.com/easyship-assets/website/courier-logos/color-img/dhl.png",
+                          "origin_country_alpha2": "HK",
+                          "umbrella_name": "FedEx"
+                        }
+                      ],
+                      "meta": {
+                        "pagination": {
+                          "page": 1,
+                          "next": null,
+                          "count": 3
+                        },
+                        "request_id": "01563646-58c1-4607-8fe0-cae3e92c4477"
+                      }
+                    },
+                    "summary": "list of couriers"
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/courier_list"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://public-api.easyship.com",
+      "description": "Production"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "description": "Bearer Token necessary to use API",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "token"
+      }
+    },
+    "schemas": {
+      "courier_list": {
+        "type": "object",
+        "description": "List of Couriers",
+        "additionalProperties": false,
+        "properties": {
+          "couriers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Courier"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/MetaWithPagination"
+          }
+        }
+      },
+      "CourierAuth": {
+        "type": "object",
+        "description": "Courier authentication state for LYOC accounts.",
+        "additionalProperties": false,
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "Authentication State for LYOC only. For Royal Mail, a newly-created account will be set to `partially_verified` until the account details have been `verified`. If there are issues with the account details, this will be set to `failed`.",
+            "enum": [
+              "unverified",
+              "partially_verified",
+              "verified",
+              "failed"
+            ]
+          },
+          "errors": {
+            "type": "array",
+            "description": "Authentication errors for LYOC only. If the authentication state of the account is `failed`, this will contain a list of error messages concerning the failure.",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CourierBase": {
+        "type": "object",
+        "description": "Courier",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customer_reference_id": {
+            "type": "string",
+            "nullable": true,
+            "description": "An identifier for the customer who owns the account. Available only for selected customers."
+          },
+          "easyship_courier": {
+            "type": "boolean",
+            "description": "Whether the courier belongs to Easyship or not."
+          },
+          "nickname": {
+            "type": "string",
+            "description": "For LYOC. Unique nickname used to identify the linked account.",
+            "minimum": 3,
+            "maximum": 15
+          },
+          "umbrella_name": {
+            "type": "string",
+            "description": "Umbrella Name of the courier"
+          },
+          "origin_country_alpha2": {
+            "$ref": "#/components/schemas/CountryAlpha2"
+          },
+          "state": {
+            "type": "string",
+            "description": "Courier State for LYOC only. For Royal Mail, a newly-created account will be set to `pending` until the account details are verified. Once verified, the account will be set to `active` and the associated courier services will available for Rates and Labels.",
+            "enum": [
+              "pending",
+              "active",
+              "inactive"
+            ]
+          },
+          "auth": {
+            "$ref": "#/components/schemas/CourierAuth"
+          },
+          "ddp_handling_fee": {
+            "type": "number",
+            "description": "For LYOC only. DDP handling fee applied by the courier when DDP is requested."
+          },
+          "pickup_fee": {
+            "type": "number",
+            "description": "For LYOC only. Additional pickup fee to apply to all shipments. This fee will be added to your quoted rates."
+          },
+          "account_number": {
+            "type": "string",
+            "nullable": true,
+            "description": "For LYOC only. The account number associated with the linked courier account."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "For LYOC only. The date and time the courier account was created in ISO 8601 format."
+          }
+        }
+      },
+      "Courier": {
+        "type": "object",
+        "description": "Courier",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/CourierBase/properties/id"
+          },
+          "customer_reference_id": {
+            "$ref": "#/components/schemas/CourierBase/properties/customer_reference_id"
+          },
+          "easyship_courier": {
+            "$ref": "#/components/schemas/CourierBase/properties/easyship_courier"
+          },
+          "nickname": {
+            "$ref": "#/components/schemas/CourierBase/properties/nickname"
+          },
+          "origin_country_alpha2": {
+            "$ref": "#/components/schemas/CountryAlpha2"
+          },
+          "state": {
+            "$ref": "#/components/schemas/CourierBase/properties/state"
+          },
+          "auth": {
+            "$ref": "#/components/schemas/CourierAuth"
+          },
+          "ddp_handling_fee": {
+            "$ref": "#/components/schemas/CourierBase/properties/ddp_handling_fee"
+          },
+          "pickup_fee": {
+            "$ref": "#/components/schemas/CourierBase/properties/pickup_fee"
+          },
+          "account_number": {
+            "$ref": "#/components/schemas/CourierBase/properties/account_number"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/CourierBase/properties/created_at"
+          },
+          "umbrella_name": {
+            "type": "string",
+            "description": "Umbrella Name of the Courier"
+          },
+          "filtered_account_details": {
+            "type": "object",
+            "description": "Account details are available only for LYOC couriers. The content is different per courier.",
+            "additionalProperties": true
+          },
+          "logo_url": {
+            "type": "string",
+            "description": "URL of the Courier logo."
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "description": "Pagination",
+        "additionalProperties": false,
+        "properties": {
+          "next": {
+            "type": "integer",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "description": "The total number of items. The `null` value is used with countless pagination (used for faster response on large datasets, like shipments).",
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "description": "Current page"
+          }
+        }
+      },
+      "Meta": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "An unique ID represent the request."
+          }
+        }
+      },
+      "MetaWithPagination": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "pagination": {
+                "$ref": "#/components/schemas/Pagination"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Meta"
+          }
+        ]
+      },
+      "CountryAlpha2": {
+        "type": "string",
+        "description": "Country Code in Alpha-2 format (ISO 3166-1)",
+        "enum": [
+          "AD",
+          "AE",
+          "AF",
+          "AG",
+          "AI",
+          "AL",
+          "AM",
+          "AN",
+          "AO",
+          "AQ",
+          "AR",
+          "AS",
+          "AT",
+          "AU",
+          "AW",
+          "AX",
+          "AZ",
+          "BA",
+          "BB",
+          "BD",
+          "BE",
+          "BF",
+          "BG",
+          "BH",
+          "BI",
+          "BJ",
+          "BL",
+          "BM",
+          "BN",
+          "BO",
+          "BQ",
+          "BR",
+          "BS",
+          "BT",
+          "BV",
+          "BW",
+          "BY",
+          "BZ",
+          "CA",
+          "CC",
+          "CD",
+          "CF",
+          "CG",
+          "CH",
+          "CI",
+          "CK",
+          "CL",
+          "CM",
+          "CN",
+          "CO",
+          "CR",
+          "CU",
+          "CV",
+          "CW",
+          "CX",
+          "CY",
+          "CZ",
+          "DE",
+          "DJ",
+          "DK",
+          "DM",
+          "DO",
+          "DZ",
+          "EC",
+          "EE",
+          "EG",
+          "EH",
+          "ER",
+          "ES",
+          "ET",
+          "FI",
+          "FJ",
+          "FK",
+          "FM",
+          "FO",
+          "FR",
+          "GA",
+          "GB",
+          "GD",
+          "GE",
+          "GF",
+          "GG",
+          "GH",
+          "GI",
+          "GL",
+          "GM",
+          "GN",
+          "GP",
+          "GQ",
+          "GR",
+          "GS",
+          "GT",
+          "GU",
+          "GW",
+          "GY",
+          "HK",
+          "HM",
+          "HN",
+          "HR",
+          "HT",
+          "HU",
+          "ID",
+          "IE",
+          "IL",
+          "IM",
+          "IN",
+          "IO",
+          "IQ",
+          "IR",
+          "IS",
+          "IT",
+          "JE",
+          "JM",
+          "JO",
+          "JP",
+          "KE",
+          "KG",
+          "KH",
+          "KI",
+          "KM",
+          "KN",
+          "KP",
+          "KR",
+          "KW",
+          "KY",
+          "KZ",
+          "LA",
+          "LB",
+          "LC",
+          "LI",
+          "LK",
+          "LR",
+          "LS",
+          "LT",
+          "LU",
+          "LV",
+          "LY",
+          "MA",
+          "MC",
+          "MD",
+          "ME",
+          "MF",
+          "MG",
+          "MH",
+          "MK",
+          "ML",
+          "MM",
+          "MN",
+          "MO",
+          "MP",
+          "MQ",
+          "MR",
+          "MS",
+          "MT",
+          "MU",
+          "MV",
+          "MW",
+          "MX",
+          "MY",
+          "MZ",
+          "NA",
+          "NC",
+          "NE",
+          "NF",
+          "NG",
+          "NI",
+          "NL",
+          "NO",
+          "NP",
+          "NR",
+          "NU",
+          "NZ",
+          "OM",
+          "PA",
+          "PE",
+          "PF",
+          "PG",
+          "PH",
+          "PK",
+          "PL",
+          "PM",
+          "PN",
+          "PR",
+          "PS",
+          "PT",
+          "PW",
+          "PY",
+          "QA",
+          "RE",
+          "RO",
+          "RS",
+          "RU",
+          "RW",
+          "SA",
+          "SB",
+          "SC",
+          "SD",
+          "SE",
+          "SG",
+          "SH",
+          "SI",
+          "SJ",
+          "SK",
+          "SL",
+          "SM",
+          "SN",
+          "SO",
+          "SR",
+          "SS",
+          "ST",
+          "SV",
+          "SX",
+          "SY",
+          "SZ",
+          "TC",
+          "TD",
+          "TF",
+          "TG",
+          "TH",
+          "TJ",
+          "TK",
+          "TL",
+          "TM",
+          "TN",
+          "TO",
+          "TR",
+          "TT",
+          "TV",
+          "TW",
+          "TZ",
+          "UA",
+          "UG",
+          "UM",
+          "US",
+          "UY",
+          "UZ",
+          "VA",
+          "VC",
+          "VE",
+          "VG",
+          "VI",
+          "VN",
+          "VU",
+          "WF",
+          "WS",
+          "YE",
+          "YT",
+          "ZA",
+          "ZM",
+          "ZW"
+        ]
+      }
+    }
+  }
+}
+```

@@ -1,0 +1,508 @@
+# List all Countries
+
+Retrieve a list of countries. 
+
+Required authorization scope: `public.reference:read`
+
+Available filtering parameters: by Alpha-2 country code or continent.
+
+
+# OpenAPI definition
+
+```json
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Easyship Public API",
+    "version": "v2024-09",
+    "description": "## Powerful Shipping API for Ecommerce\nEasyship provides a powerful shipping API for you to add hassle free worldwide shipping options to your website and end to end shipping functionality to your warehouse, ERP or platform.\n\n### Craft an amazing checkout experience\nProvide instant access to heavily discounted shipping with a single integration. Let end customers choose their preferred shipping method and cost, all within your own UI. Once they've selected and paid, confirm the shipment and all costs are guaranteed by us.\n\n### Write less code, have more options\nYou don’t need to be a shipping expert. We continuously add new shipping solutions to our platform to provide better pricing and service to our users. You don’t need to open direct accounts or write multiple integrations, once we’ve added them, they’re available to you instantly.\n\n### Streamline your processes\nInteract with the Easyship platform from any interface. Whether it’s your ecommerce platform, warehouse/wms, ERP or order management system, you can get rates, create shipments, download labels and track deliveries, without leaving your main business system.",
+    "termsOfService": "https://www.easyship.com/legal/terms/overview",
+    "contact": {
+      "name": "Easyship Support",
+      "url": "https://www.easyship.com/contact"
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Easyship API",
+    "url": "https://developers.easyship.com/"
+  },
+  "tags": [
+    {
+      "name": "Countries"
+    }
+  ],
+  "paths": {
+    "/2024-09/countries": {
+      "get": {
+        "summary": "List all Countries",
+        "tags": [
+          "Countries"
+        ],
+        "operationId": "countries_index",
+        "description": "Retrieve a list of countries. \n\nRequired authorization scope: `public.reference:read`\n\nAvailable filtering parameters: by Alpha-2 country code or continent.\n",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "required": false,
+            "description": "Page number to fetch, default: `1`",
+            "example": 1
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "required": false,
+            "description": "Number of records per page to fetch, default: `20`",
+            "example": 10
+          },
+          {
+            "name": "continent",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Africa",
+                  "Asia",
+                  "Europe",
+                  "North America",
+                  "Oceania",
+                  "Others",
+                  "South America"
+                ]
+              }
+            },
+            "explode": false,
+            "required": false,
+            "description": "Filter records by continents.",
+            "example": [
+              "Asia",
+              "Europe"
+            ]
+          },
+          {
+            "name": "alpha2",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "explode": false,
+            "required": false,
+            "description": "Filter records by country code: Alpha-2 format (ISO 3166-1).",
+            "example": [
+              "CA",
+              "UK"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of countries",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "default": {
+                    "value": {
+                      "countries": [
+                        {
+                          "alpha2": "CA",
+                          "id": 39,
+                          "name": "Canada"
+                        }
+                      ],
+                      "meta": {
+                        "pagination": {
+                          "page": 1,
+                          "next": null,
+                          "count": 1
+                        },
+                        "request_id": "01563646-58c1-4607-8fe0-cae3e92c4477"
+                      }
+                    },
+                    "summary": "list of countries"
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/country_list"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://public-api.easyship.com",
+      "description": "Production"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "description": "Bearer Token necessary to use API",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "token"
+      }
+    },
+    "schemas": {
+      "country_list": {
+        "type": "object",
+        "description": "List of countries",
+        "additionalProperties": false,
+        "properties": {
+          "countries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Country"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/MetaWithPagination"
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "description": "Pagination",
+        "additionalProperties": false,
+        "properties": {
+          "next": {
+            "type": "integer",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "description": "The total number of items. The `null` value is used with countless pagination (used for faster response on large datasets, like shipments).",
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "description": "Current page"
+          }
+        }
+      },
+      "Meta": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "description": "An unique ID represent the request."
+          }
+        }
+      },
+      "MetaWithPagination": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "pagination": {
+                "$ref": "#/components/schemas/Pagination"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/Meta"
+          }
+        ]
+      },
+      "Country": {
+        "type": "object",
+        "description": "Country",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Country ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Country name",
+            "example": "Canada"
+          },
+          "alpha2": {
+            "$ref": "#/components/schemas/CountryAlpha2"
+          }
+        }
+      },
+      "CountryAlpha2": {
+        "type": "string",
+        "description": "Country Code in Alpha-2 format (ISO 3166-1)",
+        "enum": [
+          "AD",
+          "AE",
+          "AF",
+          "AG",
+          "AI",
+          "AL",
+          "AM",
+          "AN",
+          "AO",
+          "AQ",
+          "AR",
+          "AS",
+          "AT",
+          "AU",
+          "AW",
+          "AX",
+          "AZ",
+          "BA",
+          "BB",
+          "BD",
+          "BE",
+          "BF",
+          "BG",
+          "BH",
+          "BI",
+          "BJ",
+          "BL",
+          "BM",
+          "BN",
+          "BO",
+          "BQ",
+          "BR",
+          "BS",
+          "BT",
+          "BV",
+          "BW",
+          "BY",
+          "BZ",
+          "CA",
+          "CC",
+          "CD",
+          "CF",
+          "CG",
+          "CH",
+          "CI",
+          "CK",
+          "CL",
+          "CM",
+          "CN",
+          "CO",
+          "CR",
+          "CU",
+          "CV",
+          "CW",
+          "CX",
+          "CY",
+          "CZ",
+          "DE",
+          "DJ",
+          "DK",
+          "DM",
+          "DO",
+          "DZ",
+          "EC",
+          "EE",
+          "EG",
+          "EH",
+          "ER",
+          "ES",
+          "ET",
+          "FI",
+          "FJ",
+          "FK",
+          "FM",
+          "FO",
+          "FR",
+          "GA",
+          "GB",
+          "GD",
+          "GE",
+          "GF",
+          "GG",
+          "GH",
+          "GI",
+          "GL",
+          "GM",
+          "GN",
+          "GP",
+          "GQ",
+          "GR",
+          "GS",
+          "GT",
+          "GU",
+          "GW",
+          "GY",
+          "HK",
+          "HM",
+          "HN",
+          "HR",
+          "HT",
+          "HU",
+          "ID",
+          "IE",
+          "IL",
+          "IM",
+          "IN",
+          "IO",
+          "IQ",
+          "IR",
+          "IS",
+          "IT",
+          "JE",
+          "JM",
+          "JO",
+          "JP",
+          "KE",
+          "KG",
+          "KH",
+          "KI",
+          "KM",
+          "KN",
+          "KP",
+          "KR",
+          "KW",
+          "KY",
+          "KZ",
+          "LA",
+          "LB",
+          "LC",
+          "LI",
+          "LK",
+          "LR",
+          "LS",
+          "LT",
+          "LU",
+          "LV",
+          "LY",
+          "MA",
+          "MC",
+          "MD",
+          "ME",
+          "MF",
+          "MG",
+          "MH",
+          "MK",
+          "ML",
+          "MM",
+          "MN",
+          "MO",
+          "MP",
+          "MQ",
+          "MR",
+          "MS",
+          "MT",
+          "MU",
+          "MV",
+          "MW",
+          "MX",
+          "MY",
+          "MZ",
+          "NA",
+          "NC",
+          "NE",
+          "NF",
+          "NG",
+          "NI",
+          "NL",
+          "NO",
+          "NP",
+          "NR",
+          "NU",
+          "NZ",
+          "OM",
+          "PA",
+          "PE",
+          "PF",
+          "PG",
+          "PH",
+          "PK",
+          "PL",
+          "PM",
+          "PN",
+          "PR",
+          "PS",
+          "PT",
+          "PW",
+          "PY",
+          "QA",
+          "RE",
+          "RO",
+          "RS",
+          "RU",
+          "RW",
+          "SA",
+          "SB",
+          "SC",
+          "SD",
+          "SE",
+          "SG",
+          "SH",
+          "SI",
+          "SJ",
+          "SK",
+          "SL",
+          "SM",
+          "SN",
+          "SO",
+          "SR",
+          "SS",
+          "ST",
+          "SV",
+          "SX",
+          "SY",
+          "SZ",
+          "TC",
+          "TD",
+          "TF",
+          "TG",
+          "TH",
+          "TJ",
+          "TK",
+          "TL",
+          "TM",
+          "TN",
+          "TO",
+          "TR",
+          "TT",
+          "TV",
+          "TW",
+          "TZ",
+          "UA",
+          "UG",
+          "UM",
+          "US",
+          "UY",
+          "UZ",
+          "VA",
+          "VC",
+          "VE",
+          "VG",
+          "VI",
+          "VN",
+          "VU",
+          "WF",
+          "WS",
+          "YE",
+          "YT",
+          "ZA",
+          "ZM",
+          "ZW"
+        ]
+      }
+    }
+  }
+}
+```
