@@ -219,7 +219,7 @@
 - [Delete Action of a Shipping Rule](reference/shipping_rule_action_delete-1.md): Delete shipping rule action.  Required authorization scope: `enterprise.shipping_rule:write`
 
 ## Recipes
-- [How to Create a Shipment](https://developers.easyship.com/recipes/how-to-create-a-shipment.md)
+- [How to Create a Shipment](recipes/how-to-create-a-shipment.md)
 
 ## Pages
 - [Enterprise Organization Restructure](guides/enterprise-organization-restructure.md)
