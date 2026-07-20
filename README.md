@@ -17,4 +17,4 @@ Analysis and integration testing workspace for the [Easyship API](https://develo
 - Auth: `Authorization: Bearer <token>` (tokens in `.env`)
 - Versioned paths, e.g. `GET /2024-09/account`
 
-Both tokens verified working against `GET /2024-09/account` (account: Cheeky Fit Inc, CIN1008596).
+
